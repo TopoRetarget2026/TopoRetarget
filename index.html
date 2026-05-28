@@ -9,80 +9,193 @@
 <body>
 
 <header>
-  <h1>TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation</h1>
+  <h1>TopoRetarget: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
   <p class="authors">Anonymous Submission</p>
   <p class="venue">CoRL 2026 (Under Review)</p>
+  <p class="keywords">
+    motion retargeting · reinforcement learning · dexterous manipulation · trajectory optimization
+  </p>
   <p class="links">
-    <a href="#">Paper</a> ·
-    <a href="#">Code (coming soon)</a> ·
-    <a href="#bibtex">BibTeX</a>
+    <a class="pill" href="#">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Paper
+    </a>
+    <a class="pill" href="#">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      Code
+    </a>
+    <a class="pill" href="#bibtex">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M17 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/></svg>
+      BibTeX
+    </a>
   </p>
 </header>
 
 <section>
   <img src="static/images/fig1_teaser.png" alt="Teaser">
+  <p class="caption">
+    <b>TopoRetarget</b> is a tuning-free, interaction-preserving retargeting method that converts
+    human hand-object demonstrations into robot references for contact-rich dexterous manipulation.
+    The generated references enable efficient RL policy learning and zero-shot sim-to-real transfer
+    on the Wuji Hand.
+  </p>
 </section>
 
 <section>
   <h2>Abstract</h2>
   <p>
-    Retargeting human hand-object interactions to dexterous robot hands is a key
-    bottleneck for scalable manipulation learning. Existing methods either ignore
-    contact topology or rely on heavy optimization that breaks down on
-    novel embodiments and object shapes. We propose <b>TopoRetarget</b>, an
-    interaction-centric retargeting framework that preserves contact topology
-    via a lightweight Laplacian deformation. Combined with a simple RL tracking
-    pipeline, our retargeted trajectories transfer zero-shot to a real Wuji Hand
-    on cube reorientation and pen spinning, achieving 9.33&nbsp;mm contact precision,
-    16.30° contact alignment, and +40.6&nbsp;pp success on Pen-Twirl over prior art
-    at &lt;5&nbsp;ms per frame.
+    Human hand-object demonstrations provide dense reference motions for training dexterous
+    manipulation RL policies through reference tracking. However, to use such demonstrations for
+    robot policy learning, retargeting must preserve more than hand pose and maintain the
+    object-relative interaction structure that defines task execution. Otherwise, contact and
+    feasibility artifacts can propagate into downstream RL training.
   </p>
+  <p>
+    We introduce <b>TopoRetarget</b>, a tuning-free, interaction-centric retargeting framework that
+    preserves task-relevant local hand-object topology while adapting human demonstrations to
+    dexterous robot hands. The method constructs a sparse interaction graph over hand and object
+    keypoints and optimizes distance-weighted Laplacian deformation with directional consistency,
+    kinematic constraints, and penetration handling.
+  </p>
+  <p>
+    Evaluations show that the generated references improve both interaction fidelity and policy
+    learning: TopoRetarget achieves <b>9.33&nbsp;mm</b> contact precision error and
+    <b>16.30°</b> contact alignment error on the ContactPose dataset, improves Pen-Twirl training
+    success by <b>+40.6 percentage points</b> over existing baselines, and enables zero-shot
+    transfer to Wuji Hand hardware on cube reorientation and pen spinning.
+  </p>
+</section>
+
+<section>
+  <h2>Contributions</h2>
+  <ol>
+    <li>An interaction-centric retargeting framework that preserves local hand-object topology while
+      enforcing dexterous hand kinematic and penetration constraints.</li>
+    <li>A lightweight reference-based RL tracking pipeline that enables zero-shot sim-to-real
+      transfer for contact-rich dexterous skills, including pen spinning and cube reorientation.</li>
+    <li>A dexterous hand-object interaction dataset of retargeted trajectories, task references,
+      and trained policies for reproducible reference-based dexterous manipulation.</li>
+  </ol>
 </section>
 
 <section>
   <h2>Method</h2>
   <img src="static/images/fig2_pipeline.png" alt="Pipeline">
-  <p>
-    From an input human-object trajectory, a warm-up stage initializes the robot
-    hand pose, then a topology-aware Laplacian optimization refines the
-    fingertip contacts while preserving interaction structure.
+  <p class="caption">
+    Starting from a human hand-object trajectory, a relative bone-direction warm-up initializes
+    the robot hand pose. A sparse interaction graph over hand links and object keypoints then drives
+    a distance-weighted Laplacian optimization under directional, kinematic, and non-penetration
+    constraints, producing references that preserve local interaction topology.
   </p>
 </section>
 
 <section>
-  <h2>Comparison</h2>
+  <h2>Comparison with Baselines</h2>
   <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
-  <p>
-    Compared to OmniRetarget, Mink, DexPilot and GeoRT, TopoRetarget avoids
-    common failure modes such as missed contacts, penetration, and topology drift.
+  <p class="caption">
+    Compared with hand-centric and contact-aware baselines (DexPilot, GeoRT, OmniRetarget, and
+    others), TopoRetarget avoids missed contacts, hand-object penetration, and joint
+    hyperextension caused by uniform-weight Laplacian deformation on a global scale.
   </p>
 </section>
 
 <section>
-  <h2>Real-world Results</h2>
-  <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
-  <p>Zero-shot sim-to-real rollouts on Wuji Hand: cube reorientation and pen spinning.</p>
+  <h2>Real-world Results <span class="zoom-hint">Hover to zoom</span></h2>
+  <div class="zoom" data-zoom="2.5">
+    <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
+  </div>
+  <p class="caption">
+    Zero-shot sim-to-real rollouts on the Wuji Hand for cube reorientation and pen spinning,
+    using policies trained purely with TopoRetarget references under a lightweight RL setup.
+  </p>
 </section>
 
 <section>
-  <h2>Generalization</h2>
-  <img src="static/images/fig5_generalization.png" alt="Cross-embodiment and object size">
-  <p>Generalization across embodiments (MANO / Wuji / Leap) and object scales.</p>
+  <h2>Generalization <span class="zoom-hint">Hover to zoom</span></h2>
+  <div class="zoom" data-zoom="2.5">
+    <img src="static/images/fig5_generalization.png" alt="Cross-embodiment and object size">
+  </div>
+  <p class="caption">
+    Tuning-free generalization across dexterous hand embodiments (MANO, Wuji, Leap) and across
+    object meshes and scales, from a single human demonstration.
+  </p>
 </section>
 
 <section id="bibtex">
   <h2>BibTeX</h2>
-  <pre>@inproceedings{toporetarget2026,
+  <div class="code-block">
+    <button class="copy-btn" type="button" aria-label="Copy BibTeX">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span>Copy</span>
+    </button>
+<pre>@inproceedings{toporetarget2026,
   title     = {TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation},
   author    = {Anonymous},
-  booktitle = {CoRL},
+  booktitle = {Conference on Robot Learning (CoRL)},
   year      = {2026}
 }</pre>
+  </div>
 </section>
 
 <footer>
-  <p>Anonymous CoRL 2026 submission. Page intentionally omits author info.</p>
+  <p>Anonymous CoRL 2026 submission · page omits author info for double-blind review.</p>
 </footer>
 
+<script>
+document.querySelectorAll('.zoom').forEach(box => {
+  const img = box.querySelector('img');
+  const scale = parseFloat(box.dataset.zoom) || 2.5;
+  const loupe = document.createElement('div');
+  loupe.className = 'loupe';
+  box.appendChild(loupe);
+
+  const setBg = () => {
+    loupe.style.backgroundImage = `url("${img.currentSrc || img.src}")`;
+  };
+  if (img.complete) setBg(); else img.addEventListener('load', setBg);
+
+  box.addEventListener('mousemove', e => {
+    const r = img.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    if (x < 0 || y < 0 || x > r.width || y > r.height) {
+      loupe.style.opacity = 0;
+      return;
+    }
+    const lw = loupe.offsetWidth;
+    const lh = loupe.offsetHeight;
+    const offset = 18;
+    let lx = x + offset;
+    let ly = y - lh - offset;
+    if (lx + lw > r.width)  lx = x - lw - offset;
+    if (ly < 0)             ly = y + offset;
+    loupe.style.opacity = 1;
+    loupe.style.left = lx + 'px';
+    loupe.style.top  = ly + 'px';
+    loupe.style.backgroundSize = (r.width * scale) + 'px ' + (r.height * scale) + 'px';
+    loupe.style.backgroundPosition =
+      `-${x * scale - lw / 2}px -${y * scale - lh / 2}px`;
+  });
+  box.addEventListener('mouseleave', () => { loupe.style.opacity = 0; });
+});
+
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const pre = btn.parentElement.querySelector('pre');
+    try {
+      await navigator.clipboard.writeText(pre.innerText);
+    } catch {
+      const r = document.createRange(); r.selectNodeContents(pre);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      document.execCommand('copy'); s.removeAllRanges();
+    }
+    const label = btn.querySelector('span');
+    const old = label.textContent;
+    label.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { label.textContent = old; btn.classList.remove('copied'); }, 1500);
+  });
+});
+</script>
 </body>
 </html>

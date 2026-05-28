@@ -1,0 +1,7 @@
+*.zip
+*.tar.gz
+*.pdf
+overleaf_src/
+*_evidence.md
+*_todo.md
+.DS_Store
