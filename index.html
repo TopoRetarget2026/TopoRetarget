@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation</title>
+<link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation</h1>
+  <p class="authors">Anonymous Submission</p>
+  <p class="venue">CoRL 2026 (Under Review)</p>
+  <p class="links">
+    <a href="#">Paper</a> ·
+    <a href="#">Code (coming soon)</a> ·
+    <a href="#bibtex">BibTeX</a>
+  </p>
+</header>
+
+<section>
+  <img src="static/images/fig1_teaser.png" alt="Teaser">
+</section>
+
+<section>
+  <h2>Abstract</h2>
+  <p>
+    Retargeting human hand-object interactions to dexterous robot hands is a key
+    bottleneck for scalable manipulation learning. Existing methods either ignore
+    contact topology or rely on heavy optimization that breaks down on
+    novel embodiments and object shapes. We propose <b>TopoRetarget</b>, an
+    interaction-centric retargeting framework that preserves contact topology
+    via a lightweight Laplacian deformation. Combined with a simple RL tracking
+    pipeline, our retargeted trajectories transfer zero-shot to a real Wuji Hand
+    on cube reorientation and pen spinning, achieving 9.33&nbsp;mm contact precision,
+    16.30° contact alignment, and +40.6&nbsp;pp success on Pen-Twirl over prior art
+    at &lt;5&nbsp;ms per frame.
+  </p>
+</section>
+
+<section>
+  <h2>Method</h2>
+  <img src="static/images/fig2_pipeline.png" alt="Pipeline">
+  <p>
+    From an input human-object trajectory, a warm-up stage initializes the robot
+    hand pose, then a topology-aware Laplacian optimization refines the
+    fingertip contacts while preserving interaction structure.
+  </p>
+</section>
+
+<section>
+  <h2>Comparison</h2>
+  <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
+  <p>
+    Compared to OmniRetarget, Mink, DexPilot and GeoRT, TopoRetarget avoids
+    common failure modes such as missed contacts, penetration, and topology drift.
+  </p>
+</section>
+
+<section>
+  <h2>Real-world Results</h2>
+  <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
+  <p>Zero-shot sim-to-real rollouts on Wuji Hand: cube reorientation and pen spinning.</p>
+</section>
+
+<section>
+  <h2>Generalization</h2>
+  <img src="static/images/fig5_generalization.png" alt="Cross-embodiment and object size">
+  <p>Generalization across embodiments (MANO / Wuji / Leap) and object scales.</p>
+</section>
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+  <pre>@inproceedings{toporetarget2026,
+  title     = {TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation},
+  author    = {Anonymous},
+  booktitle = {CoRL},
+  year      = {2026}
+}</pre>
+</section>
+
+<footer>
+  <p>Anonymous CoRL 2026 submission. Page intentionally omits author info.</p>
+</footer>
+
+</body>
+</html>
