@@ -21,6 +21,7 @@ header h1 {
 .venue   { color: #888; font-size: .9rem; margin: .2rem 0; }
 .keywords { color: #777; font-size: .85rem; margin: .4rem 0 .8rem; font-style: italic; }
 .caption { color: #555; font-size: .9rem; margin-top: .3rem; }
+.topo { color: #008000; font-weight: 700; }
 .zoom {
   position: relative;
   cursor: crosshair;

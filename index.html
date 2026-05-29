@@ -9,7 +9,7 @@
 <body>
 
 <header>
-  <h1>TopoRetarget: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
+  <h1><span class="topo">TopoRetarget</span>: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
   <p class="authors">Anonymous Submission</p>
   <p class="venue">CoRL 2026 (Under Review)</p>
   <p class="keywords">
@@ -34,10 +34,9 @@
 <section>
   <img src="static/images/fig1_teaser.png" alt="Teaser">
   <p class="caption">
-    <b>TopoRetarget</b> is a tuning-free, interaction-preserving retargeting method that converts
-    human hand-object demonstrations into robot references for contact-rich dexterous manipulation.
-    The generated references enable efficient RL policy learning and zero-shot sim-to-real transfer
-    on the Wuji Hand.
+    <span class="topo">TopoRetarget</span> converts human hand-object trajectories collected with a
+    motion-capture glove into robot references for contact-rich dexterous manipulation. The generated
+    references enable efficient RL policy learning and zero-shot sim-to-real transfer on the Wuji Hand.
   </p>
 </section>
 
@@ -51,18 +50,19 @@
     feasibility artifacts can propagate into downstream RL training.
   </p>
   <p>
-    We introduce <b>TopoRetarget</b>, a tuning-free, interaction-centric retargeting framework that
-    preserves task-relevant local hand-object topology while adapting human demonstrations to
-    dexterous robot hands. The method constructs a sparse interaction graph over hand and object
-    keypoints and optimizes distance-weighted Laplacian deformation with directional consistency,
-    kinematic constraints, and penetration handling.
+    We introduce <span class="topo">TopoRetarget</span>, an interaction-centric retargeting framework
+    that uses a single parameter set across diverse retargeting conditions while preserving
+    task-relevant local hand-object topology and adapting human demonstrations to dexterous robot
+    hands. The method constructs a sparse interaction graph over hand and object keypoints and
+    optimizes distance-weighted Laplacian deformation with directional consistency, kinematic
+    constraints, and penetration handling.
   </p>
   <p>
     Evaluations show that the generated references improve both interaction fidelity and policy
-    learning: TopoRetarget achieves <b>9.33&nbsp;mm</b> contact precision error and
-    <b>16.30°</b> contact alignment error on the ContactPose dataset, improves Pen-Twirl training
-    success by <b>+40.6 percentage points</b> over existing baselines, and enables zero-shot
-    transfer to Wuji Hand hardware on cube reorientation and pen spinning.
+    learning: <span class="topo">TopoRetarget</span> achieves the best contact precision and
+    alignment over all baselines on the ContactPose dataset, improves Pen-Spin training success by
+    <b>+40.6 percentage points</b> over existing baselines, and enables zero-shot transfer to Wuji
+    Hand hardware on cube reorientation and pen spinning.
   </p>
 </section>
 
@@ -82,10 +82,10 @@
   <h2>Method</h2>
   <img src="static/images/fig2_pipeline.png" alt="Pipeline">
   <p class="caption">
-    Starting from a human hand-object trajectory, a relative bone-direction warm-up initializes
-    the robot hand pose. A sparse interaction graph over hand links and object keypoints then drives
-    a distance-weighted Laplacian optimization under directional, kinematic, and non-penetration
-    constraints, producing references that preserve local interaction topology.
+    <span class="topo">TopoRetarget</span> overview. Given a human demonstration, object mesh, and
+    target hand model, the method aligns bone directions during initialization, constructs source and
+    robot interaction meshes, and computes the robot configuration via topology-aware Laplacian
+    optimization. The output robot motion reference preserves hand-object interaction.
   </p>
 </section>
 
@@ -93,8 +93,9 @@
   <h2>Comparison with Baselines</h2>
   <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
   <p class="caption">
-    Compared with hand-centric and contact-aware baselines (DexPilot, GeoRT, OmniRetarget, and
-    others), TopoRetarget avoids missed contacts, hand-object penetration, and joint
+    Retargeting artifacts of existing methods under hand-object and hand-only cases. Compared with
+    hand-centric and contact-aware baselines (DexPilot, GeoRT, OmniRetarget, and others),
+    <span class="topo">TopoRetarget</span> avoids missed contacts, hand-object penetration, and joint
     hyperextension caused by uniform-weight Laplacian deformation on a global scale.
   </p>
 </section>
@@ -105,8 +106,10 @@
     <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
   </div>
   <p class="caption">
-    Zero-shot sim-to-real rollouts on the Wuji Hand for cube reorientation and pen spinning,
-    using policies trained purely with TopoRetarget references under a lightweight RL setup.
+    Interaction-mesh visualizations of retargeted reference trajectories (A,&nbsp;C) and the
+    corresponding zero-shot real-world executions (B,&nbsp;D) for cube reorientation and pen spinning
+    on the Wuji Hand, using policies trained purely with <span class="topo">TopoRetarget</span>
+    references under a lightweight RL setup.
   </p>
 </section>
 
@@ -116,8 +119,9 @@
     <img src="static/images/fig5_generalization.png" alt="Cross-embodiment and object size">
   </div>
   <p class="caption">
-    Tuning-free generalization across dexterous hand embodiments (MANO, Wuji, Leap) and across
-    object meshes and scales, from a single human demonstration.
+    Augmentation across object scales and dexterous hand embodiments without per-case retuning:
+    from a single human demonstration, <span class="topo">TopoRetarget</span> adapts to new object
+    meshes, object scales, and hand embodiments (MANO, Wuji, Leap).
   </p>
 </section>
 
