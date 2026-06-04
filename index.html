@@ -31,39 +31,58 @@
   </p>
 </header>
 
-<section>
-  <img src="static/images/fig1_teaser.png" alt="Teaser">
+<section class="hero">
+  <video src="static/videos/hero.mp4" poster="static/videos/posters/hero.jpg"
+         autoplay muted loop playsinline controls preload="metadata"></video>
   <p class="caption">
-    <span class="topo">TopoRetarget</span> converts human hand-object trajectories collected with a
-    motion-capture glove into robot references for contact-rich dexterous manipulation. The generated
-    references enable efficient RL policy learning and zero-shot sim-to-real transfer on the Wuji Hand.
+    We retarget human hand-object demonstrations to the Wuji Hand while keeping the interaction that
+    drives the task intact, then train reference-tracking policies for contact-rich skills such as pen
+    spinning and cube reorientation. <span class="muted">(Unmute for narration.)</span>
   </p>
 </section>
 
 <section>
   <h2>Abstract</h2>
   <p>
-    Human hand-object demonstrations provide dense reference motions for training dexterous
-    manipulation RL policies through reference tracking. However, to use such demonstrations for
-    robot policy learning, retargeting must preserve more than hand pose and maintain the
-    object-relative interaction structure that defines task execution. Otherwise, contact and
-    feasibility artifacts can propagate into downstream RL training.
+    Human demonstrations are a rich source of reference motion for dexterous manipulation, but they
+    are hard to reuse directly. Human and robot hands differ enough that naively matching fingertips
+    or joint angles breaks the contact structure that actually drives a task &mdash; and those
+    artifacts propagate into reinforcement learning as missed contacts, penetration, and infeasible
+    poses.
   </p>
   <p>
-    We introduce <span class="topo">TopoRetarget</span>, an interaction-centric retargeting framework
-    that uses a single parameter set across diverse retargeting conditions while preserving
-    task-relevant local hand-object topology and adapting human demonstrations to dexterous robot
-    hands. The method constructs a sparse interaction graph over hand and object keypoints and
-    optimizes distance-weighted Laplacian deformation with directional consistency, kinematic
-    constraints, and penetration handling.
+    We introduce <span class="topo">TopoRetarget</span>, an interaction-centric retargeting framework.
+    Instead of copying hand pose, it preserves the local hand-object <i>topology</i> &mdash; which
+    keypoints touch, and how. We build a sparse interaction graph over hand and object keypoints and
+    solve a distance-weighted Laplacian deformation under directional-consistency, kinematic, and
+    non-penetration constraints. A single parameter set handles every embodiment, object, and scale
+    we evaluate.
   </p>
   <p>
-    Evaluations show that the generated references improve both interaction fidelity and policy
-    learning: <span class="topo">TopoRetarget</span> achieves the best contact precision and
-    alignment over all baselines on the ContactPose dataset, improves Pen-Spin training success by
-    <b>+40.6 percentage points</b> over existing baselines, and enables zero-shot transfer to Wuji
-    Hand hardware on cube reorientation and pen spinning.
+    The references this produces are both more faithful and easier to learn from. On ContactPose,
+    <span class="topo">TopoRetarget</span> attains the best contact precision and alignment of any
+    baseline; it lifts Pen-Spin training success by <b>+40.6 percentage points</b>; and the policies
+    it enables transfer to Wuji Hand hardware <b>zero-shot</b> on cube reorientation and pen spinning.
   </p>
+</section>
+
+<section class="stats" aria-label="Key results">
+  <div class="stat">
+    <div class="stat-num">84.4<span class="unit">%</span></div>
+    <div class="stat-label">Ho-cap tracking success</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">87.5<span class="unit">%</span></div>
+    <div class="stat-label">Pen-Spin success <span class="topo">(+40.6 pp)</span></div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">&minus;91<span class="unit">%</span></div>
+    <div class="stat-label">max penetration vs baselines</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">200<span class="unit">FPS</span></div>
+    <div class="stat-label">retargeting throughput</div>
+  </div>
 </section>
 
 <section>
@@ -80,6 +99,10 @@
 
 <section>
   <h2>Method</h2>
+  <p class="section-intro">
+    How does it work? We turn a single human demonstration into a robot-ready reference in four
+    steps &mdash; then let a lightweight RL policy track it.
+  </p>
   <img src="static/images/fig2_pipeline.png" alt="Pipeline">
   <p class="caption">
     <span class="topo">TopoRetarget</span> overview. Given a human demonstration, object mesh, and
@@ -87,30 +110,75 @@
     robot interaction meshes, and computes the robot configuration via topology-aware Laplacian
     optimization. The output robot motion reference preserves hand-object interaction.
   </p>
+
+  <div class="grid grid-4 steps">
+    <figure class="vid">
+      <video src="static/videos/method_01_human.mp4" poster="static/videos/posters/method_01_human.jpg" muted loop playsinline preload="none"></video>
+      <figcaption><span class="step-no">01</span> Human Hand-Object Motion</figcaption>
+    </figure>
+    <figure class="vid">
+      <video src="static/videos/method_02_graph.mp4" poster="static/videos/posters/method_02_graph.jpg" muted loop playsinline preload="none"></video>
+      <figcaption><span class="step-no">02</span> Sparse Interaction Graph</figcaption>
+    </figure>
+    <figure class="vid">
+      <video src="static/videos/method_03_retarget.mp4" poster="static/videos/posters/method_03_retarget.jpg" muted loop playsinline preload="none"></video>
+      <figcaption><span class="step-no">03</span> Retargeted Reference</figcaption>
+    </figure>
+    <figure class="vid">
+      <video src="static/videos/method_04_policy.mp4" poster="static/videos/posters/method_04_policy.jpg" muted loop playsinline preload="none"></video>
+      <figcaption><span class="step-no">04</span> RL Tracking Policy</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <h2>Real-time Hand-Object Retargeting</h2>
+  <p class="section-intro">
+    We optimize the interaction graph at <b>200&nbsp;FPS (5&nbsp;ms / frame)</b> &mdash; fast enough to
+    retarget a live human demonstration onto the robot hand online.
+  </p>
+  <div class="grid grid-2">
+    <figure class="vid">
+      <video src="static/videos/live_robot.mp4" poster="static/videos/posters/live_robot.jpg" muted loop playsinline preload="none"></video>
+      <figcaption>Hand-object interaction mesh on the robot embodiment (ours).</figcaption>
+    </figure>
+    <figure class="vid">
+      <video src="static/videos/live_human.mp4" poster="static/videos/posters/live_human.jpg" muted loop playsinline preload="none"></video>
+      <figcaption>Live human demonstration driving the retargeting.</figcaption>
+    </figure>
+  </div>
 </section>
 
 <section>
   <h2>Comparison with Baselines</h2>
+  <p class="section-intro">
+    How does this compare to prior retargeting? Hand-centric and contact-aware baselines tend to miss
+    contacts, penetrate the object, or hyperextend joints. <span class="topo">TopoRetarget</span> doesn't.
+  </p>
   <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
   <p class="caption">
     Retargeting artifacts of existing methods under hand-object and hand-only cases. Compared with
     hand-centric and contact-aware baselines (DexPilot, GeoRT, OmniRetarget, and others),
     <span class="topo">TopoRetarget</span> avoids missed contacts, hand-object penetration, and joint
-    hyperextension caused by uniform-weight Laplacian deformation on a global scale.
+    hyperextension caused by uniform-weight Laplacian deformation on a global scale &mdash;
+    <b>&minus;36% contact precision error</b> and <b>&minus;91% max penetration</b> vs the baseline average.
   </p>
-</section>
 
-<section>
-  <h2>Real-world Results <span class="zoom-hint">Hover to zoom</span></h2>
-  <div class="zoom" data-zoom="2.5">
-    <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
+  <h3 class="cmp-title">Object-free finger opposition <span class="zoom-hint">Hover to zoom</span></h3>
+  <div class="grid grid-4 cmp">
+    <figure class="vid zoomable"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_pose_topo.mp4" poster="static/videos/posters/cmp_pose_topo.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_pose_omni.mp4" poster="static/videos/posters/cmp_pose_omni.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag">DexPilot</span><video src="static/videos/cmp_pose_dexpilot.mp4" poster="static/videos/posters/cmp_pose_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag ref">Human (MANO)</span><video src="static/videos/cmp_pose_mano.mp4" poster="static/videos/posters/cmp_pose_mano.jpg" muted loop playsinline preload="none"></video></figure>
   </div>
-  <p class="caption">
-    Interaction-mesh visualizations of retargeted reference trajectories (A,&nbsp;C) and the
-    corresponding zero-shot real-world executions (B,&nbsp;D) for cube reorientation and pen spinning
-    on the Wuji Hand, using policies trained purely with <span class="topo">TopoRetarget</span>
-    references under a lightweight RL setup.
-  </p>
+
+  <h3 class="cmp-title">Hand-object interaction <span class="zoom-hint">Hover to zoom</span></h3>
+  <div class="grid grid-4 cmp">
+    <figure class="vid zoomable"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_obj_topo.mp4" poster="static/videos/posters/cmp_obj_topo.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_obj_omni.mp4" poster="static/videos/posters/cmp_obj_omni.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag">DexPilot</span><video src="static/videos/cmp_obj_dexpilot.mp4" poster="static/videos/posters/cmp_obj_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid zoomable"><span class="tag">Mink</span><video src="static/videos/cmp_obj_mink.mp4" poster="static/videos/posters/cmp_obj_mink.jpg" muted loop playsinline preload="none"></video></figure>
+  </div>
 </section>
 
 <section>
@@ -123,6 +191,44 @@
     from a single human demonstration, <span class="topo">TopoRetarget</span> adapts to new object
     meshes, object scales, and hand embodiments (MANO, Wuji, Leap).
   </p>
+</section>
+
+<section>
+  <h2>Efficient RL Training</h2>
+  <p class="section-intro">
+    Because the references are clean, RL has far less to fight: we train a contact-rich pen-spinning
+    policy in <b>1.5&nbsp;hours on a single GPU</b> under a lightweight reward-tracking setup.
+  </p>
+  <figure class="vid wide">
+    <video src="static/videos/rl_parallel.mp4" poster="static/videos/posters/rl_parallel.jpg" muted loop playsinline preload="none"></video>
+    <figcaption>Massively parallel reference-tracking RL in simulation.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>Real-world Results <span class="zoom-hint">Hover to zoom</span></h2>
+  <p class="section-intro">
+    But does it survive contact with reality? We deploy the trained policies on the Wuji Hand with no
+    fine-tuning &mdash; pure zero-shot transfer from simulation.
+  </p>
+  <div class="zoom" data-zoom="2.5">
+    <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
+  </div>
+  <p class="caption">
+    Interaction-mesh visualizations of retargeted reference trajectories (A,&nbsp;C) and the
+    corresponding zero-shot real-world executions (B,&nbsp;D) for cube reorientation and pen spinning
+    on the Wuji Hand, using policies trained purely with <span class="topo">TopoRetarget</span>
+    references under a lightweight RL setup.
+  </p>
+
+  <p class="section-intro top-gap">
+    Across <b>5 / 5</b> zero-shot trials the policy keeps the pen spinning on the Wuji Hand. Here is one
+    full-length, uncut stability run:
+  </p>
+  <figure class="vid wide">
+    <video src="static/videos/real_stability.mp4" poster="static/videos/posters/real_stability.jpg" controls loop playsinline muted preload="metadata"></video>
+    <figcaption>Extended in-hand pen-spin stability test, played end to end.</figcaption>
+  </figure>
 </section>
 
 <section id="bibtex">
@@ -146,6 +252,28 @@
 </footer>
 
 <script>
+// Play looping clips only while on screen (saves CPU with many videos)
+(() => {
+  const vids = document.querySelectorAll('video[loop]');
+  if (!('IntersectionObserver' in window)) {
+    vids.forEach(v => v.play().catch(() => {}));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) {
+        if (v.preload === 'none') v.preload = 'auto';
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }, { rootMargin: '200px 0px', threshold: 0.1 });
+  vids.forEach(v => io.observe(v));
+})();
+
+// Magnifier loupe on figures marked .zoom
 document.querySelectorAll('.zoom').forEach(box => {
   const img = box.querySelector('img');
   const scale = parseFloat(box.dataset.zoom) || 2.5;
@@ -183,6 +311,7 @@ document.querySelectorAll('.zoom').forEach(box => {
   box.addEventListener('mouseleave', () => { loupe.style.opacity = 0; });
 });
 
+// Copy BibTeX
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', async () => {
     const pre = btn.parentElement.querySelector('pre');
