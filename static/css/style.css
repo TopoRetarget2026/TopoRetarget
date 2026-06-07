@@ -147,6 +147,8 @@ figure.vid .tag.ref  { color: var(--accent); }
     box-shadow: 0 10px 30px rgba(0, 0, 0, .32);
     border-color: rgba(0, 0, 0, .15);
   }
+  /* half-width clips (2x2 cube grid) need a gentler zoom */
+  .cubes figure.vid.zoomable:hover video { transform: scale(1.7); }
 }
 
 /* ---- Stats strip ---- */
