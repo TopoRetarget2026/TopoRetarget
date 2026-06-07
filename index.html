@@ -20,10 +20,6 @@
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       Paper
     </a>
-    <a class="pill" href="#">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-      Code
-    </a>
     <a class="pill" href="#bibtex">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M17 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/></svg>
       BibTeX
@@ -66,25 +62,6 @@
   </p>
 </section>
 
-<section class="stats" aria-label="Key results">
-  <div class="stat">
-    <div class="stat-num">84.4<span class="unit">%</span></div>
-    <div class="stat-label">Ho-cap tracking success</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">87.5<span class="unit">%</span></div>
-    <div class="stat-label">Pen-Spin success <span class="topo">(+40.6 pp)</span></div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">&minus;91<span class="unit">%</span></div>
-    <div class="stat-label">max penetration vs baselines</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">200<span class="unit">FPS</span></div>
-    <div class="stat-label">retargeting throughput</div>
-  </div>
-</section>
-
 <section>
   <h2>Contributions</h2>
   <ol>
@@ -111,7 +88,7 @@
     optimization. The output robot motion reference preserves hand-object interaction.
   </p>
 
-  <div class="grid grid-4 steps">
+  <div class="grid grid-2 steps">
     <figure class="vid">
       <video src="static/videos/method_01_human.mp4" poster="static/videos/posters/method_01_human.jpg" muted loop playsinline preload="none"></video>
       <figcaption><span class="step-no">01</span> Human Hand-Object Motion</figcaption>
@@ -132,24 +109,6 @@
 </section>
 
 <section>
-  <h2>Real-time Hand-Object Retargeting</h2>
-  <p class="section-intro">
-    We optimize the interaction graph at <b>200&nbsp;FPS (5&nbsp;ms / frame)</b> &mdash; fast enough to
-    retarget a live human demonstration onto the robot hand online.
-  </p>
-  <div class="grid grid-2">
-    <figure class="vid">
-      <video src="static/videos/live_robot.mp4" poster="static/videos/posters/live_robot.jpg" muted loop playsinline preload="none"></video>
-      <figcaption>Hand-object interaction mesh on the robot embodiment (ours).</figcaption>
-    </figure>
-    <figure class="vid">
-      <video src="static/videos/live_human.mp4" poster="static/videos/posters/live_human.jpg" muted loop playsinline preload="none"></video>
-      <figcaption>Live human demonstration driving the retargeting.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<section>
   <h2>Comparison with Baselines</h2>
   <p class="section-intro">
     How does this compare to prior retargeting? Hand-centric and contact-aware baselines tend to miss
@@ -164,20 +123,20 @@
     <b>&minus;36% contact precision error</b> and <b>&minus;91% max penetration</b> vs the baseline average.
   </p>
 
-  <h3 class="cmp-title">Object-free finger opposition <span class="zoom-hint">Hover to zoom</span></h3>
-  <div class="grid grid-4 cmp">
-    <figure class="vid zoomable"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_pose_topo.mp4" poster="static/videos/posters/cmp_pose_topo.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_pose_omni.mp4" poster="static/videos/posters/cmp_pose_omni.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag">DexPilot</span><video src="static/videos/cmp_pose_dexpilot.mp4" poster="static/videos/posters/cmp_pose_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag ref">Human (MANO)</span><video src="static/videos/cmp_pose_mano.mp4" poster="static/videos/posters/cmp_pose_mano.jpg" muted loop playsinline preload="none"></video></figure>
+  <h3 class="cmp-title">Object-free finger opposition</h3>
+  <div class="grid grid-2 cmp cmp-2x2">
+    <figure class="vid"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_pose_topo.mp4" poster="static/videos/posters/cmp_pose_topo.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_pose_omni.mp4" poster="static/videos/posters/cmp_pose_omni.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag">DexPilot</span><video src="static/videos/cmp_pose_dexpilot.mp4" poster="static/videos/posters/cmp_pose_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag ref">Human (MANO)</span><video src="static/videos/cmp_pose_mano.mp4" poster="static/videos/posters/cmp_pose_mano.jpg" muted loop playsinline preload="none"></video></figure>
   </div>
 
-  <h3 class="cmp-title">Hand-object interaction <span class="zoom-hint">Hover to zoom</span></h3>
-  <div class="grid grid-4 cmp">
-    <figure class="vid zoomable"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_obj_topo.mp4" poster="static/videos/posters/cmp_obj_topo.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_obj_omni.mp4" poster="static/videos/posters/cmp_obj_omni.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag">DexPilot</span><video src="static/videos/cmp_obj_dexpilot.mp4" poster="static/videos/posters/cmp_obj_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><span class="tag">Mink</span><video src="static/videos/cmp_obj_mink.mp4" poster="static/videos/posters/cmp_obj_mink.jpg" muted loop playsinline preload="none"></video></figure>
+  <h3 class="cmp-title">Hand-object interaction</h3>
+  <div class="grid grid-2 cmp cmp-2x2">
+    <figure class="vid"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_obj_topo.mp4" poster="static/videos/posters/cmp_obj_topo.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_obj_omni.mp4" poster="static/videos/posters/cmp_obj_omni.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag">DexPilot</span><video src="static/videos/cmp_obj_dexpilot.mp4" poster="static/videos/posters/cmp_obj_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag">Mink</span><video src="static/videos/cmp_obj_mink.mp4" poster="static/videos/posters/cmp_obj_mink.jpg" muted loop playsinline preload="none"></video></figure>
   </div>
 </section>
 
@@ -206,29 +165,20 @@
 </section>
 
 <section>
-  <h2>Real-world Results <span class="zoom-hint">Hover to zoom</span></h2>
+  <h2>Real-world Results</h2>
   <p class="section-intro">
     But does it survive contact with reality? We deploy the trained policies on the Wuji Hand with no
     fine-tuning &mdash; pure zero-shot transfer from simulation.
   </p>
-  <div class="zoom" data-zoom="2.5">
-    <img src="static/images/fig4_realworld.png" alt="Wuji Hand real-world rollouts">
-  </div>
-  <p class="caption">
-    Interaction-mesh visualizations of retargeted reference trajectories (A,&nbsp;C) and the
-    corresponding zero-shot real-world executions (B,&nbsp;D) for cube reorientation and pen spinning
-    on the Wuji Hand, using policies trained purely with <span class="topo">TopoRetarget</span>
-    references under a lightweight RL setup.
-  </p>
 
   <p class="section-intro top-gap">
-    Zero-shot cube reorientation on the Wuji Hand <span class="zoom-hint">Hover to zoom</span>:
+    Zero-shot cube reorientation on the Wuji Hand:
   </p>
   <div class="grid grid-2 cubes">
-    <figure class="vid zoomable"><video src="static/videos/cube_01.mp4" poster="static/videos/posters/cube_01.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><video src="static/videos/cube_02.mp4" poster="static/videos/posters/cube_02.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><video src="static/videos/cube_03.mp4" poster="static/videos/posters/cube_03.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid zoomable"><video src="static/videos/cube_04.mp4" poster="static/videos/posters/cube_04.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/cube_01.mp4" poster="static/videos/posters/cube_01.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/cube_02.mp4" poster="static/videos/posters/cube_02.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/cube_03.mp4" poster="static/videos/posters/cube_03.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/cube_04.mp4" poster="static/videos/posters/cube_04.jpg" muted loop playsinline preload="none"></video></figure>
   </div>
 
   <p class="section-intro top-gap">
