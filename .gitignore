@@ -7,3 +7,8 @@ overleaf_src/
 .DS_Store
 static/videos/Teaser_Video.mp4
 render_assets.zip
+*.code-workspace
+
+# local scratch & dev tooling (not part of the published site)
+1/
+scripts/

@@ -95,6 +95,7 @@ section > img {
   border: 1px solid var(--line);
   background: #000;
 }
+.hero .caption { text-align: center; }
 
 /* ---- Video figures & grids ---- */
 .grid { display: grid; gap: .8rem; margin: .9rem 0 .3rem; }
@@ -117,6 +118,7 @@ figure.vid figcaption {
   line-height: 1.4;
 }
 figure.vid.wide video { border-radius: 6px; }
+figure.vid.wide figcaption { text-align: center; }
 
 .steps .step-no {
   display: inline-block;

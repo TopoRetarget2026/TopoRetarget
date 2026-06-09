@@ -15,26 +15,12 @@
   <p class="keywords">
     motion retargeting · reinforcement learning · dexterous manipulation · trajectory optimization
   </p>
-  <p class="links">
-    <a class="pill" href="#">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Paper
-    </a>
-    <a class="pill" href="#bibtex">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"/><path d="M17 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"/></svg>
-      BibTeX
-    </a>
-  </p>
 </header>
 
 <section class="hero">
   <video src="static/videos/hero.mp4" poster="static/videos/posters/hero.jpg"
          autoplay muted loop playsinline controls preload="metadata"></video>
-  <p class="caption">
-    We retarget human hand-object demonstrations to the Wuji Hand while keeping the interaction that
-    drives the task intact, then train reference-tracking policies for contact-rich skills such as pen
-    spinning and cube reorientation. <span class="muted">(Unmute for narration.)</span>
-  </p>
+  <p class="caption"><span class="muted">Unmute for background music.</span></p>
 </section>
 
 <section>
@@ -76,10 +62,6 @@
 
 <section>
   <h2>Method</h2>
-  <p class="section-intro">
-    How does it work? We turn a single human demonstration into a robot-ready reference in four
-    steps &mdash; then let a lightweight RL policy track it.
-  </p>
   <img src="static/images/fig2_pipeline.png" alt="Pipeline">
   <p class="caption">
     <span class="topo">TopoRetarget</span> overview. Given a human demonstration, object mesh, and
@@ -87,52 +69,30 @@
     robot interaction meshes, and computes the robot configuration via topology-aware Laplacian
     optimization. The output robot motion reference preserves hand-object interaction.
   </p>
-
-  <div class="grid grid-2 steps">
-    <figure class="vid">
-      <video src="static/videos/method_01_human.mp4" poster="static/videos/posters/method_01_human.jpg" muted loop playsinline preload="none"></video>
-      <figcaption><span class="step-no">01</span> Human Hand-Object Motion</figcaption>
-    </figure>
-    <figure class="vid">
-      <video src="static/videos/method_02_graph.mp4" poster="static/videos/posters/method_02_graph.jpg" muted loop playsinline preload="none"></video>
-      <figcaption><span class="step-no">02</span> Sparse Interaction Graph</figcaption>
-    </figure>
-    <figure class="vid">
-      <video src="static/videos/method_03_retarget.mp4" poster="static/videos/posters/method_03_retarget.jpg" muted loop playsinline preload="none"></video>
-      <figcaption><span class="step-no">03</span> Retargeted Reference</figcaption>
-    </figure>
-    <figure class="vid">
-      <video src="static/videos/method_04_policy.mp4" poster="static/videos/posters/method_04_policy.jpg" muted loop playsinline preload="none"></video>
-      <figcaption><span class="step-no">04</span> RL Tracking Policy</figcaption>
-    </figure>
-  </div>
 </section>
 
 <section>
   <h2>Comparison with Baselines</h2>
   <p class="section-intro">
-    How does this compare to prior retargeting? Hand-centric and contact-aware baselines tend to miss
-    contacts, penetrate the object, or hyperextend joints. <span class="topo">TopoRetarget</span> doesn't.
+    <span class="topo">TopoRetarget</span> better preserves both intra-hand relationships and
+    hand-object interactions than the baseline methods.
   </p>
   <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
   <p class="caption">
-    Retargeting artifacts of existing methods under hand-object and hand-only cases. Compared with
-    hand-centric and contact-aware baselines (DexPilot, GeoRT, OmniRetarget, and others),
-    <span class="topo">TopoRetarget</span> avoids missed contacts, hand-object penetration, and joint
-    hyperextension caused by uniform-weight Laplacian deformation on a global scale &mdash;
-    <b>&minus;36% contact precision error</b> and <b>&minus;91% max penetration</b> vs the baseline average.
+    Against the baseline average, <span class="topo">TopoRetarget</span> reduces contact precision
+    error by <b>36%</b> and maximum penetration by <b>91%</b>.
   </p>
 
-  <h3 class="cmp-title">Object-free finger opposition</h3>
-  <div class="grid grid-2 cmp cmp-2x2">
+  <h3 class="cmp-title">Hand-only</h3>
+  <div class="grid grid-2 cmp cmp-2x2" data-syncgroup>
     <figure class="vid"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_pose_topo.mp4" poster="static/videos/posters/cmp_pose_topo.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_pose_omni.mp4" poster="static/videos/posters/cmp_pose_omni.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><span class="tag">DexPilot</span><video src="static/videos/cmp_pose_dexpilot.mp4" poster="static/videos/posters/cmp_pose_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
-    <figure class="vid"><span class="tag ref">Human (MANO)</span><video src="static/videos/cmp_pose_mano.mp4" poster="static/videos/posters/cmp_pose_mano.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><span class="tag ref">Source human motion (MANO)</span><video src="static/videos/cmp_pose_mano.mp4" poster="static/videos/posters/cmp_pose_mano.jpg" muted loop playsinline preload="none"></video></figure>
   </div>
 
   <h3 class="cmp-title">Hand-object interaction</h3>
-  <div class="grid grid-2 cmp cmp-2x2">
+  <div class="grid grid-2 cmp cmp-2x2" data-syncgroup>
     <figure class="vid"><span class="tag best">TopoRetarget</span><video src="static/videos/cmp_obj_topo.mp4" poster="static/videos/posters/cmp_obj_topo.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><span class="tag">OmniRetarget</span><video src="static/videos/cmp_obj_omni.mp4" poster="static/videos/posters/cmp_obj_omni.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><span class="tag">DexPilot</span><video src="static/videos/cmp_obj_dexpilot.mp4" poster="static/videos/posters/cmp_obj_dexpilot.jpg" muted loop playsinline preload="none"></video></figure>
@@ -153,28 +113,12 @@
 </section>
 
 <section>
-  <h2>Efficient RL Training</h2>
-  <p class="section-intro">
-    Because the references are clean, RL has far less to fight: we train a contact-rich pen-spinning
-    policy in <b>1.5&nbsp;hours on a single GPU</b> under a lightweight reward-tracking setup.
-  </p>
-  <figure class="vid wide">
-    <video src="static/videos/rl_parallel.mp4" poster="static/videos/posters/rl_parallel.jpg" muted loop playsinline preload="none"></video>
-    <figcaption>Massively parallel reference-tracking RL in simulation.</figcaption>
-  </figure>
-</section>
-
-<section>
   <h2>Real-world Results</h2>
-  <p class="section-intro">
-    But does it survive contact with reality? We deploy the trained policies on the Wuji Hand with no
-    fine-tuning &mdash; pure zero-shot transfer from simulation.
-  </p>
 
   <p class="section-intro top-gap">
     Zero-shot cube reorientation on the Wuji Hand:
   </p>
-  <div class="grid grid-2 cubes">
+  <div class="grid grid-2 cubes" data-syncgroup>
     <figure class="vid"><video src="static/videos/cube_01.mp4" poster="static/videos/posters/cube_01.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><video src="static/videos/cube_02.mp4" poster="static/videos/posters/cube_02.jpg" muted loop playsinline preload="none"></video></figure>
     <figure class="vid"><video src="static/videos/cube_03.mp4" poster="static/videos/posters/cube_03.jpg" muted loop playsinline preload="none"></video></figure>
@@ -182,12 +126,21 @@
   </div>
 
   <p class="section-intro top-gap">
-    Across <b>5 / 5</b> zero-shot trials the policy keeps the pen spinning on the Wuji Hand. Here is one
-    full-length, uncut stability run:
+    Zero-shot pen spinning on the Wuji Hand:
+  </p>
+  <div class="grid grid-2 cubes" data-syncgroup>
+    <figure class="vid"><video src="static/videos/pen_01.mp4" poster="static/videos/posters/pen_01.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/pen_02.mp4" poster="static/videos/posters/pen_02.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/pen_03.mp4" poster="static/videos/posters/pen_03.jpg" muted loop playsinline preload="none"></video></figure>
+    <figure class="vid"><video src="static/videos/pen_04.mp4" poster="static/videos/posters/pen_04.jpg" muted loop playsinline preload="none"></video></figure>
+  </div>
+
+  <p class="section-intro top-gap">
+    Across <b>5 / 5</b> zero-shot trials the policy keeps the pen spinning on the Wuji Hand.
+    A full-length, uncut stability run:
   </p>
   <figure class="vid wide">
     <video src="static/videos/real_stability.mp4" poster="static/videos/posters/real_stability.jpg" controls loop playsinline muted preload="metadata"></video>
-    <figcaption>Extended in-hand pen-spin stability test, played end to end.</figcaption>
   </figure>
 </section>
 
@@ -195,10 +148,7 @@
   <h2>Summary Video</h2>
   <figure class="vid wide">
     <video src="static/videos/hero-short.mp4" poster="static/videos/posters/hero-short.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
-    <figcaption>
-      A one-minute overview of <span class="topo">TopoRetarget</span> &mdash; from human demonstration
-      to zero-shot deployment on the Wuji Hand. <span class="muted">(Unmute for narration.)</span>
-    </figcaption>
+    <figcaption><span class="muted">Unmute for background music.</span></figcaption>
   </figure>
 </section>
 
@@ -223,9 +173,11 @@
 </footer>
 
 <script>
-// Play looping clips only while on screen (saves CPU with many videos)
+// Play looping clips only while on screen (saves CPU with many videos).
+// Videos inside a [data-syncgroup] are handled by the sync controller below.
 (() => {
-  const vids = document.querySelectorAll('video[loop]');
+  const vids = [...document.querySelectorAll('video[loop]')]
+    .filter(v => !v.closest('[data-syncgroup]'));
   if (!('IntersectionObserver' in window)) {
     vids.forEach(v => v.play().catch(() => {}));
     return;
@@ -242,6 +194,91 @@
     });
   }, { rootMargin: '200px 0px', threshold: 0.1 });
   vids.forEach(v => io.observe(v));
+})();
+
+// ---- Synchronized 2x2 video grids (real-world cube + pen) ----
+// The four clips of a grid are speed-equalized to the same length, but they load
+// in unpredictable order on the public web, so naive per-video autoplay drifts
+// out of phase. Each [data-syncgroup] is driven as one unit: a "master" clip owns
+// the clock, the others are gated until every clip can play, start together from
+// frame 0, restart together at the master's loop boundary, and are continuously
+// locked to the master so none drifts — all four start and stop together. If JS
+// is disabled, the native `loop` attribute still plays them (unsynced) as a
+// graceful fallback.
+(() => {
+  const groups = [...document.querySelectorAll('[data-syncgroup]')].map(group => {
+    const vids = [...group.querySelectorAll('video')];
+    vids.forEach(v => { v.loop = false; v.muted = true; v.playsInline = true; });
+    return { group, vids, master: vids[0], ready: new Set(), armed: false, onScreen: false };
+  }).filter(g => g.vids.length);
+  if (!groups.length) return;
+
+  const startGroup = (g) => {
+    if (!g.armed || !g.onScreen) return;
+    g.vids.forEach(v => { try { v.currentTime = 0; } catch (e) {} });
+    g.vids.forEach(v => v.play().catch(() => {}));
+  };
+
+  const arm = (g, v) => {
+    g.ready.add(v);
+    if (g.ready.size === g.vids.length && !g.armed) { g.armed = true; startGroup(g); }
+  };
+
+  groups.forEach(g => {
+    g.vids.forEach(v => {
+      // Arm each clip once it can play; prefer canplaythrough, fall back to loadeddata.
+      if (v.readyState >= 3) arm(g, v);
+      else {
+        v.addEventListener('canplaythrough', () => arm(g, v), { once: true });
+        v.addEventListener('loadeddata', () => setTimeout(() => arm(g, v), 1200), { once: true });
+      }
+    });
+    // Restart the whole group together when the master finishes a loop.
+    g.master.addEventListener('ended', () => startGroup(g));
+  });
+
+  // Single rAF clock locks every tile to the master: one that fell behind is
+  // seeked forward; one that somehow paused mid-loop is replayed; one that already
+  // reached the loop end stays frozen until the master restarts the group.
+  const lock = () => {
+    groups.forEach(g => {
+      if (!g.armed || !g.onScreen || g.master.paused) return;
+      const t = g.master.currentTime;
+      g.vids.forEach(v => {
+        if (v === g.master) return;
+        if (v.paused) {
+          if (v.currentTime < v.duration - 0.1) v.play().catch(() => {});
+        } else if (Math.abs(v.currentTime - t) > 0.18) {
+          try { v.currentTime = t; } catch (e) {}
+        }
+      });
+    });
+    requestAnimationFrame(lock);
+  };
+  requestAnimationFrame(lock);
+
+  // Bring a grid online when it scrolls into view. Changing `preload` alone won't
+  // start the fetch in most browsers, so call load() to make the readiness events
+  // (loadeddata / canplaythrough) fire — that is what arms and starts the group.
+  const enter = (g) => {
+    g.onScreen = true;
+    g.vids.forEach(v => { v.preload = 'auto'; if (v.readyState === 0) v.load(); });
+    startGroup(g);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const g = groups.find(x => x.group === e.target);
+        if (!g) return;
+        if (e.isIntersecting) enter(g);
+        else { g.onScreen = false; g.vids.forEach(v => v.pause()); }
+      });
+    }, { rootMargin: '200px 0px', threshold: 0.1 });
+    groups.forEach(g => io.observe(g.group));
+  } else {
+    groups.forEach(enter);
+  }
 })();
 
 // Magnifier loupe on figures marked .zoom
