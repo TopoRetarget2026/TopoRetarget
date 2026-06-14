@@ -11,7 +11,6 @@
 <header>
   <h1><span class="topo">TopoRetarget</span>: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
   <p class="authors">Anonymous Submission</p>
-  <p class="venue">CoRL 2026 (Under Review)</p>
   <p class="keywords">
     motion retargeting · reinforcement learning · dexterous manipulation · trajectory optimization
   </p>
@@ -151,26 +150,6 @@
     <figcaption><span class="muted">Unmute for background music.</span></figcaption>
   </figure>
 </section>
-
-<section id="bibtex">
-  <h2>BibTeX</h2>
-  <div class="code-block">
-    <button class="copy-btn" type="button" aria-label="Copy BibTeX">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span>Copy</span>
-    </button>
-<pre>@inproceedings{toporetarget2026,
-  title     = {TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation},
-  author    = {Anonymous},
-  booktitle = {Conference on Robot Learning (CoRL)},
-  year      = {2026}
-}</pre>
-  </div>
-</section>
-
-<footer>
-  <p>Anonymous CoRL 2026 submission · page omits author info for double-blind review.</p>
-</footer>
 
 <script>
 // Play looping clips only while on screen (saves CPU with many videos).
@@ -317,25 +296,6 @@ document.querySelectorAll('.zoom').forEach(box => {
       `-${x * scale - lw / 2}px -${y * scale - lh / 2}px`;
   });
   box.addEventListener('mouseleave', () => { loupe.style.opacity = 0; });
-});
-
-// Copy BibTeX
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const pre = btn.parentElement.querySelector('pre');
-    try {
-      await navigator.clipboard.writeText(pre.innerText);
-    } catch {
-      const r = document.createRange(); r.selectNodeContents(pre);
-      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      document.execCommand('copy'); s.removeAllRanges();
-    }
-    const label = btn.querySelector('span');
-    const old = label.textContent;
-    label.textContent = 'Copied!';
-    btn.classList.add('copied');
-    setTimeout(() => { label.textContent = old; btn.classList.remove('copied'); }, 1500);
-  });
 });
 </script>
 </body>
