@@ -1,6 +1,6 @@
 # TopoRetarget
 
-Project page for *TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation*.
+Project page for *TopoRetarget: Interaction-Preserving Retargeting for Dexterous Manipulation*.
 
 Anonymous submission — no author info on this page.
 
