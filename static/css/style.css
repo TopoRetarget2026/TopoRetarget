@@ -40,7 +40,6 @@ header h1 {
   letter-spacing: -0.02em;
 }
 .authors { color: var(--soft); margin: .2rem 0; }
-.venue   { color: var(--muted); font-size: .9rem; margin: .2rem 0; }
 .keywords { color: var(--muted); font-size: .85rem; margin: .4rem 0 .8rem; font-style: italic; }
 .caption { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
 .section-intro { color: var(--muted); font-size: .95rem; margin: .2rem 0 .9rem; }
