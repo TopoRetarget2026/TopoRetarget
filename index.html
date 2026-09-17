@@ -10,7 +10,15 @@
 
 <header>
   <h1><span class="topo">TopoRetarget</span>: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
-  <p class="authors">Anonymous Submission</p>
+  <p class="authors">
+    Jielin Wu<sup>*</sup>, Shenzhe Yao<sup>*</sup>, Guanqi He<sup>*&Dagger;</sup>, Xiaohan Liu<sup>*&Dagger;</sup>,
+    Zhaoqing Zeng, Xiangrui Jiang, Han Yang, Wentao Zhang, Hang Zhao<sup>&dagger;</sup>
+  </p>
+  <p class="venue">
+    IIIS, Tsinghua University<br>
+    <sup>*</sup>Equal contribution &nbsp; <sup>&Dagger;</sup>Project lead &nbsp; <sup>&dagger;</sup>Corresponding author
+  </p>
+  <p class="venue">CoRL 2026</p>
   <p class="keywords">
     motion retargeting · reinforcement learning · dexterous manipulation · trajectory optimization
   </p>
@@ -147,6 +155,22 @@
   <figure class="vid wide">
     <video src="static/videos/hero-short.mp4" poster="static/videos/posters/hero-short.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
   </figure>
+</section>
+
+<section id="bibtex">
+  <h2>BibTeX</h2>
+  <div class="code-block">
+    <button class="copy-btn" type="button" aria-label="Copy BibTeX">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span>Copy</span>
+    </button>
+<pre>@inproceedings{toporetarget2026,
+  title     = {TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation},
+  author    = {Jielin Wu and Shenzhe Yao and Guanqi He and Xiaohan Liu and Zhaoqing Zeng and Xiangrui Jiang and Han Yang and Wentao Zhang and Hang Zhao},
+  booktitle = {Conference on Robot Learning (CoRL)},
+  year      = {2026}
+}</pre>
+  </div>
 </section>
 
 <script>
@@ -294,6 +318,25 @@ document.querySelectorAll('.zoom').forEach(box => {
       `-${x * scale - lw / 2}px -${y * scale - lh / 2}px`;
   });
   box.addEventListener('mouseleave', () => { loupe.style.opacity = 0; });
+});
+
+// Copy BibTeX
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const pre = btn.parentElement.querySelector('pre');
+    try {
+      await navigator.clipboard.writeText(pre.innerText);
+    } catch {
+      const r = document.createRange(); r.selectNodeContents(pre);
+      const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      document.execCommand('copy'); s.removeAllRanges();
+    }
+    const label = btn.querySelector('span');
+    const old = label.textContent;
+    label.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { label.textContent = old; btn.classList.remove('copied'); }, 1500);
+  });
 });
 </script>
 </body>
