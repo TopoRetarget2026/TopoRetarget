@@ -143,6 +143,23 @@ figure.vid .tag {
   color: var(--muted);
   margin-bottom: .3rem;
 }
+.cmp figure.vid .tag { line-height: 1.25; }
+/* Keep videos row-aligned when labels of different lengths wrap (mobile
+   staircase fix): let each figure span a tag-row + video-row via subgrid,
+   so tags share one row height and videos share another across columns. */
+@supports (grid-template-rows: subgrid) {
+  .cmp.grid { grid-auto-rows: min-content; }
+  .cmp figure.vid {
+    grid-row: span 2;
+    display: grid;
+    grid-template-rows: subgrid;
+    row-gap: 0; /* tag->video spacing comes from tag margin, not the grid gap */
+  }
+}
+/* Fallback for browsers without subgrid: reserve a 2-line tag height. */
+@supports not (grid-template-rows: subgrid) {
+  .cmp figure.vid .tag { min-height: 2.5em; }
+}
 /* 2x2 finger-opposition grid: gentler hover zoom (half width) */
 @media (hover: hover) {
   .cmp-2x2 figure.vid.zoomable:hover video { transform: scale(1.6); }

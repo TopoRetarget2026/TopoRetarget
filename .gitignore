@@ -12,3 +12,9 @@ render_assets.zip
 # local scratch & dev tooling (not part of the published site)
 1/
 scripts/
+# local dev tooling (vscode preview task)
+.vscode/
+
+# local-only project notes (holds push token — never publish)
+CLAUDE.md
+.claude/

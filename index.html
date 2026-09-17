@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation</title>
+<title>TopoRetarget: Interaction-Preserving Retargeting for Dexterous Manipulation</title>
 <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 
 <header>
-  <h1><span class="topo">TopoRetarget</span>: Interaction-centric Retargeting<br>for Dexterous Manipulation</h1>
+  <h1><span class="topo">TopoRetarget</span>: Interaction-Preserving Retargeting<br>for Dexterous Manipulation</h1>
   <p class="authors">
     Jielin Wu<sup>*</sup>, Shenzhe Yao<sup>*</sup>, Guanqi He<sup>*&Dagger;</sup>, Xiaohan Liu<sup>*&Dagger;</sup>,
     Zhaoqing Zeng, Xiangrui Jiang, Han Yang, Wentao Zhang, Hang Zhao<sup>&dagger;</sup>
@@ -39,8 +39,8 @@
     poses.
   </p>
   <p>
-    We introduce <span class="topo">TopoRetarget</span>, an interaction-centric retargeting framework.
-    Instead of copying hand pose, it preserves the local hand-object <i>topology</i> &mdash; which
+    We introduce <span class="topo">TopoRetarget</span>, an interaction-preserving retargeting framework.
+    Instead of copying hand pose, it preserves the local hand-object <i>interaction</i> &mdash; which
     keypoints touch, and how. We build a sparse interaction graph over hand and object keypoints and
     solve a distance-weighted Laplacian deformation under directional-consistency, kinematic, and
     non-penetration constraints. A single parameter set handles every embodiment, object, and scale
@@ -57,7 +57,7 @@
 <section>
   <h2>Contributions</h2>
   <ol>
-    <li>An interaction-centric retargeting framework that preserves local hand-object topology while
+    <li>An interaction-preserving retargeting framework that maintains local hand-object interaction while
       enforcing dexterous hand kinematic and penetration constraints.</li>
     <li>A lightweight reference-based RL tracking pipeline that enables zero-shot sim-to-real
       transfer for contact-rich dexterous skills, including pen spinning and cube reorientation.</li>
@@ -86,7 +86,7 @@
   <img src="static/images/fig3_comparison.png" alt="Comparison with baselines">
   <p class="caption">
     Against the baseline average, <span class="topo">TopoRetarget</span> reduces contact precision
-    error by <b>36%</b> and maximum penetration by <b>91%</b>.
+    error by <b>55%</b> and maximum penetration by <b>92%</b>.
   </p>
 
   <h3 class="cmp-title">Hand-only</h3>
@@ -165,7 +165,7 @@
       <span>Copy</span>
     </button>
 <pre>@inproceedings{toporetarget2026,
-  title     = {TopoRetarget: Interaction-centric Retargeting for Dexterous Manipulation},
+  title     = {TopoRetarget: Interaction-Preserving Retargeting for Dexterous Manipulation},
   author    = {Jielin Wu and Shenzhe Yao and Guanqi He and Xiaohan Liu and Zhaoqing Zeng and Xiangrui Jiang and Han Yang and Wentao Zhang and Hang Zhao},
   booktitle = {Conference on Robot Learning (CoRL)},
   year      = {2026}
