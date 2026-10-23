@@ -1,6 +1,7 @@
 *.zip
 *.tar.gz
 *.pdf
+!static/images/paper.pdf
 overleaf_src/
 *_evidence.md
 *_todo.md
